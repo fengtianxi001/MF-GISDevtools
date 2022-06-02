@@ -33,32 +33,33 @@ module.exports = {
     },
   },
   chainWebpack: (config) => {
-    config.resolve.alias
-      .set("@", resolve("./src"))
-      .set("assets", resolve("./src/assets"))
-      .set("components", resolve("./src/components"))
-      .set("constants", resolve("./src/constants"))
-      .set("controllers", resolve("./src/controllers"))
-      .set("styles", resolve("./src/styles"))
-      .set("utils", resolve("./src/utils"))
-      .set("views", resolve("./src/views"))
-      .set("hooks", resolve("./src/hooks"))
-
-      .set("configs", resolve("./src/configs"));
+    config.resolve.alias.set("@", resolve("./src"));
+    config.module.rule("svg").exclude.add(resolve("./src/icons/menus")).end();
+    config.module
+      .rule("icons")
+      .test(/\.svg$/)
+      .include.add(resolve("./src/icons"))
+      .end()
+      .use("svg-sprite-loader")
+      .loader("svg-sprite-loader")
+      .options({
+        symbolId: "icon-[name]",
+      })
+      .end();
   },
   css: {
     loaderOptions: {
       scss: {
         additionalData: `
-          @use "@/styles/var.scss" as *;
-          @use "@/styles/mixins.scss" as *;
-          @use "@/styles/base.scss" as *;
-          @use "@/styles/theme.scss" as *;
+          @use "@/assets/styles/var.scss" as *;
+          @use "@/assets/styles/mixins.scss" as *;
+          @use "@/assets/styles/base.scss" as *;
+          @use "@/assets/styles/theme.scss" as *;
         `,
       },
     },
   },
   configureWebpack: {
     plugins: [],
-  }
+  },
 };

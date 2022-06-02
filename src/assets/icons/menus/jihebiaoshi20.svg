@@ -1,0 +1,41 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+  t="1653497717505"
+  class="icon"
+  viewBox="0 0 1024 1024"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  p-id="3301"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="200"
+  height="200"
+>
+  <defs>
+    <style type="text/css">
+      @font-face {
+        font-family: feedback-iconfont;
+        src: url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.woff2?t=1630033759944")
+            format("woff2"),
+          url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.woff?t=1630033759944")
+            format("woff"),
+          url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.ttf?t=1630033759944")
+            format("truetype");
+      }
+    </style>
+  </defs>
+  <path
+    d="M362.666667 362.666667m-277.333334 0a277.333333 277.333333 0 1 0 554.666667 0 277.333333 277.333333 0 1 0-554.666667 0Z"
+    fill="var(--menu-icon-color1)"
+    p-id="3302"
+  ></path>
+  <path
+    d="M469.333333 213.333333m106.666667 0l256 0q106.666667 0 106.666667 106.666667l0 512q0 106.666667-106.666667 106.666667l-256 0q-106.666667 0-106.666667-106.666667l0-512q0-106.666667 106.666667-106.666667Z"
+    fill="var(--menu-icon-color3)"
+    p-id="3303"
+  ></path>
+  <path
+    d="M596.416 213.333333A276.053333 276.053333 0 0 1 640 362.666667c0 115.370667-70.442667 214.293333-170.666667 256.085333V320a106.666667 106.666667 0 0 1 106.666667-106.666667z"
+    fill="var(--menu-icon-color3)"
+    p-id="3304"
+  ></path>
+</svg>
