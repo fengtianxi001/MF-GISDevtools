@@ -12,17 +12,8 @@ export const routes: routesType[] = [
     path: "/devtools",
     name: "devtools",
     meta: {
-      title: "leaflet配置",
+      title: "2D地图配置",
       icon: "jihebiaoshi01",
-    },
-    component: () => import("@/views/Test/index.vue"),
-  },
-  {
-    path: "/gewu",
-    name: "gewu",
-    meta: {
-      title: "坐标提取",
-      icon: "jihebiaoshi02",
     },
     component: () => import("@/views/Test/index.vue"),
   },
@@ -30,9 +21,18 @@ export const routes: routesType[] = [
     path: "/geo",
     name: "geo",
     meta: {
-      title: "3D地图",
+      title: "3D地图配置",
       icon: "jihebiaoshi03",
     },
     component: () => import("@/views/Test/index.vue"),
   },
+  {
+    path: "/gewu",
+    name: "gewu",
+    meta: {
+      title: "GIS信息",
+      icon: "jihebiaoshi02",
+    },
+    component: () => import("@/views/Test/index.vue"),
+  }
 ];
