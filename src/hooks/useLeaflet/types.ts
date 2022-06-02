@@ -24,7 +24,8 @@ export interface tileOptionsType {
 
 export interface mapOptionsType extends L.MapOptions {
   zoom: number;
-  center: L.LatLngExpression;
+  centerLat: number,
+  centerLng: number,
   zoomAble?: boolean;
 }
 

@@ -1,6 +1,8 @@
 <template>
   <div class="base-panel">
-    <div class="base-panel__title">{{ title }}</div>
+    <div class="base-panel__title">
+      <span>{{ title }}</span>
+    </div>
     <div class="base-panel__content">
       <slot></slot>
     </div>
@@ -18,18 +20,20 @@ const props = defineProps<propsType>();
   border-radius: 6px;
   // overflow: hidden;
   // border: 1px solid #dbdbdd;
-  margin-bottom: 10px;
+  margin-top: 10px;
   .base-panel__title {
     $height: 30px;
     $charHeight:14px;
     height: 30px;
     line-height: 30px;
-    font-size: 12px;
+    font-size: 13px;
     padding: 0 10px;
     // border-bottom: 1px solid #dbdbdd;
     // background-color: #f3f3f3;
     position: relative;
     font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
     // padding: 0 4px;
     &::before{
       content: "";

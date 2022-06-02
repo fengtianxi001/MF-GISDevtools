@@ -21,6 +21,6 @@ const style = computed(() => {
 <style lang="scss" scoped>
 .base-grid-row {
   display: grid;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 </style>

@@ -55,10 +55,12 @@ export function useLeaflet(
   onMounted(() => {
     if (container.value instanceof HTMLElement) {
       const { mapOptions, tileOptions } = leafletOptions;
+      const center = [mapOptions.centerLat, mapOptions.centerLng];
       map.value = L.map(
         container.value,
         Object.assign(
           { attributionControl: false, zoomControl: false },
+          { center },
           mapOptions
         )
       );

@@ -19,7 +19,7 @@
 </template>
 <script setup lang="ts">
 import BasePageLayoutTabs from "./BasePageLayoutTabs.vue";
-import BaseButtonGroup from "@/components/BaseButtonGroup/index.vue"
+import BaseButtonGroup from "@/components/BaseButtonGroup/index.vue";
 import { ref } from "vue";
 interface PropsType {
   tabs: Array<{
@@ -67,7 +67,7 @@ const onTabHandle = (value: any) => {
       border-right: 1px solid $my_border_color;
       overflow: hidden;
       .base-page__sidebar__srollbar {
-        padding: 10px;
+        padding: 0 10px;
       }
     }
     .base-page__main {
