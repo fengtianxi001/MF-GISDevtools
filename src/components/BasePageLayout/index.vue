@@ -1,18 +1,12 @@
 <template>
   <div class="base-page">
     <div class="base-page__header">
-      <ul class="base-page__header-left">
-        <li
-          v-for="({ label, value }, index) in tabs"
-          :key="index"
-          @click="onTabHandle(value)"
-        >
-          <span class="base-page__header-title">{{ label }}</span>
-          <span class="base-page__header-underline"></span>
-        </li>
-      </ul>
-      <div class="base-page__header-right"></div>
+      <base-page-layout-tabs :tabs="tabs" />
+      <div class="base-page__header-right">
+        <el-button size="small">123</el-button>
+      </div>
     </div>
+
     <div class="base-page__content">
       <div class="base-page__sidebar">
         <el-scrollbar class="base-page__sidebar__srollbar">
@@ -26,6 +20,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import BasePageLayoutTabs from "./BasePageLayoutTabs.vue";
 import { ref } from "vue";
 interface PropsType {
   tabs: Array<{
@@ -58,25 +53,7 @@ $border_color: #f4f4f4;
     padding: 0 20px;
     position: relative;
     user-select: none;
-    .base-page__header-left {
-      display: flex;
-      column-gap: 20px;
-    }
-    .base-page__header-title {
-      color: #436ff6;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .base-page__header-underline {
-      display: flex;
-      background-color: #436ff6;
-      width: 100%;
-      height: 3px;
-      position: relative;
-      bottom: -8px;
-      border-radius: 3px 3px 0 0;
-    }
+    justify-content: space-between;
   }
   .base-page__content {
     width: 100%;
@@ -90,10 +67,10 @@ $border_color: #f4f4f4;
       overflow: auto;
       background-color: #fff;
       border-right: 1px solid $border_color;
-    //   padding: 10px;
+      //   padding: 10px;
       overflow: hidden;
-      .base-page__sidebar__srollbar{
-          padding: 10px;
+      .base-page__sidebar__srollbar {
+        padding: 10px;
       }
     }
     .base-page__main {
