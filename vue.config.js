@@ -51,10 +51,11 @@ module.exports = {
     loaderOptions: {
       scss: {
         additionalData: `
-          @use "@/assets/styles/var.scss" as *;
+          @use "@/assets/styles/variable.scss" as *;
+          @use "@/assets/styles/theme.scss" as *;
           @use "@/assets/styles/mixins.scss" as *;
           @use "@/assets/styles/base.scss" as *;
-          @use "@/assets/styles/theme.scss" as *;
+          @use "@/assets/styles/reset.scss" as *;
         `,
       },
     },

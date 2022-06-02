@@ -17,7 +17,12 @@ import LayoutMenu from "./LayoutMenu.vue";
 .layout {
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(to right, #374361, #2b344f);
+  background-image: radial-gradient(
+    circle at center,
+    rgba($my_main_color, 1),
+    rgba($my_main_color, 0.92)
+    
+  );
   display: grid;
   grid-template-rows: 43px 1fr;
   .layout__content {

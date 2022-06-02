@@ -25,14 +25,14 @@ const onTabHandle = (value) => {};
   display: flex;
   column-gap: 20px;
   &__title {
-    color: #436ff6;
+    color: $ele_main_color;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
   }
   &__underline {
     display: flex;
-    background-color: #436ff6;
+    background-color: $ele_main_color;
     width: 100%;
     height: 3px;
     position: relative;

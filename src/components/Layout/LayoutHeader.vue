@@ -6,6 +6,7 @@
       <li></li>
     </ul>
     <div class="layout__header__search">
+      <i class="mfl mf-search"></i>
       <span>搜索</span>
     </div>
   </div>
@@ -35,14 +36,14 @@
       cursor: pointer;
       -webkit-app-region: no-drag;
     }
-    &:hover{
-      li:nth-child(1){
+    &:hover {
+      li:nth-child(1) {
         background-color: #ff5c5c;
       }
-      li:nth-child(2){
+      li:nth-child(2) {
         background-color: #ffb74d;
       }
-      li:nth-child(3){
+      li:nth-child(3) {
         background-color: #5fc152;
       }
     }
@@ -50,7 +51,7 @@
   .layout__header__search {
     width: 354px;
     height: 28px;
-    background-color: #586279;
+    // background-color: $my_main_color__light;
     background-image: radial-gradient(#566077, #555d71);
     border-radius: 6px;
     display: flex;
@@ -60,6 +61,10 @@
     font-size: 12px;
     &:hover {
       background-image: radial-gradient(#6a7286, #6b7389);
+    }
+    .mfl {
+      margin-right: 6px;
+      font-size: 14px;
     }
   }
 }

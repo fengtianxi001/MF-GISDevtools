@@ -60,10 +60,10 @@ onMounted(switchIconStatus);
   margin-top: 2px;
   user-select: none;
   &:hover {
-    background-color: #2b3349;
+    background-color: $my_main_color__deep;
   }
   &.active {
-    background-color: #2b3349;
+    background-color: $my_main_color__deep;
   }
   cursor: pointer;
   .icon {

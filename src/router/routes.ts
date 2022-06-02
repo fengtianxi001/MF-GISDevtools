@@ -9,13 +9,13 @@ export type routesType = RouteRecordRaw & {
 
 export const routes: routesType[] = [
   {
-    path: "/devtools",
-    name: "devtools",
+    path: "/",
+    name: "leaflet",
     meta: {
       title: "2D地图配置",
       icon: "jihebiaoshi01",
     },
-    component: () => import("@/views/Test/index.vue"),
+    component: () => import("@/views/leaflet/index.vue"),
   },
   {
     path: "/geo",
@@ -24,15 +24,15 @@ export const routes: routesType[] = [
       title: "3D地图配置",
       icon: "jihebiaoshi03",
     },
-    component: () => import("@/views/Test2/index.vue"),
+    component: () => import("@/views/geo/index.vue"),
   },
   {
-    path: "/gewu",
-    name: "gewu",
+    path: "/gis",
+    name: "gis",
     meta: {
       title: "GIS信息",
       icon: "jihebiaoshi02",
     },
-    component: () => import("@/views/Test3/index.vue"),
+    component: () => import("@/views/gis/index.vue"),
   }
 ];

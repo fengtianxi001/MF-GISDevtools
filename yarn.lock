@@ -6447,7 +6447,7 @@ locate-path@^5.0.0:
 
 lodash-es@^4.17.21:
   version "4.17.21"
-  resolved "https://registry.npmmirror.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
 lodash-unified@^1.0.2:
@@ -6684,6 +6684,16 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmmirror.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==
+
+mf-fonts@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mf-fonts/-/mf-fonts-1.0.1.tgz#bc4999595ba98137fd4a54dcb8ae62c54ff578cb"
+  integrity sha512-JmAgBIqywIpNDNkIBIEktvIhwqQrpiaZ7M5UUBgBtqHsxY7US111nxs0efELcQubeucWitumwCG2VPxOK9ai8g==
+
+mf-icos@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/mf-icos/-/mf-icos-1.0.4.tgz#3d98fd096371842b18168057742a77861a729c42"
+  integrity sha512-L2fRZhz70c8gbHsAB2F3S6Fp2bp+z5OlBITKjL+h2JAkJoalxt5wZtR/I5pUY1Ec4/5Dy+JkUbJ51PiT2WZ6oQ==
 
 micromatch@3.1.0:
   version "3.1.0"
