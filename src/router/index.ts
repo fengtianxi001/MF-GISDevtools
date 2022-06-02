@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-
+import { routes as staticRoutes } from "./routes";
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: () => import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
-    // redirect: moduleProject[0]["path"],
+    component: () => import("@/views/Home.vue"),
   },
+  ...staticRoutes,
 ];
 
 const router = createRouter({

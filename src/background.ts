@@ -7,9 +7,10 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 960,
     height: 640,
-    resizable: false,
+    resizable: true,
     closable: true,
     // transparent: true,
+    frame: false,
     opacity: 1,
     hasShadow: true,
     webPreferences: {
