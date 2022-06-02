@@ -1,5 +1,5 @@
 <template>
-  <base-page-layout :tabs="[{ label: 'test', value: '123' }]">
+  <base-page-layout :tabs="[{ label: '3D地图设置', value: '123' }]">
     <template #sider>
       <base-panel title="地图基础配置">
         <el-form label-position="left" size="small">
@@ -9,21 +9,16 @@
           <el-form-item label="中心纬度">
             <el-input></el-input>
           </el-form-item>
-          <el-form-item label="缩放倍速">
+          <el-form-item label="地图范围(KM)">
             <el-input></el-input>
           </el-form-item>
         </el-form>
-        <el-button size="small"> 取消</el-button>
-        <el-button size="small"> 应用配置</el-button>
+        <el-button size="small"> 预览地图范围</el-button>
+        <el-button size="small"> 渲染地图</el-button>
       </base-panel>
-      <base-panel title="瓦片配置">
-        <el-form label-position="left" size="small">
-          <el-form-item label="xxx" v-for="item in 10">
-            <el-slider />
-          </el-form-item>
-        </el-form>
-        <el-button size="small"> 取消</el-button>
-        <el-button size="small"> 应用配置</el-button>
+      <base-panel title="其他设置">
+        <el-button size="small"> 加入模型</el-button>
+        <el-button size="small"> 开启编辑模式</el-button>
       </base-panel>
     </template>
     <template #main>

@@ -15,7 +15,9 @@
     </div>
     <div class="base-page__content">
       <div class="base-page__sidebar">
-        <slot name="sider"></slot>
+        <el-scrollbar class="base-page__sidebar__srollbar">
+          <slot name="sider"></slot>
+        </el-scrollbar>
       </div>
       <div class="base-page__main">
         <slot name="main"></slot>
@@ -88,8 +90,11 @@ $border_color: #f4f4f4;
       overflow: auto;
       background-color: #fff;
       border-right: 1px solid $border_color;
-      padding: 10px;
+    //   padding: 10px;
       overflow: hidden;
+      .base-page__sidebar__srollbar{
+          padding: 10px;
+      }
     }
     .base-page__main {
       width: 100%;

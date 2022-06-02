@@ -24,7 +24,7 @@ export const routes: routesType[] = [
       title: "3D地图配置",
       icon: "jihebiaoshi03",
     },
-    component: () => import("@/views/Test/index.vue"),
+    component: () => import("@/views/Test2/index.vue"),
   },
   {
     path: "/gewu",
@@ -33,6 +33,6 @@ export const routes: routesType[] = [
       title: "GIS信息",
       icon: "jihebiaoshi02",
     },
-    component: () => import("@/views/Test/index.vue"),
+    component: () => import("@/views/Test3/index.vue"),
   }
 ];
