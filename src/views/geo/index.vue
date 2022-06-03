@@ -1,25 +1,19 @@
 <template>
-  <base-page-layout :tabs="[{ label: '3D地图设置', value: '123' }]">
+  <base-page-layout :tabs="[{ label: '3d地图配置', value: '2dConfig' }]">
+    <template #buttons>
+      <base-button-group :options="buttonOptions"></base-button-group>
+    </template>
     <template #sider>
-      <base-panel title="地图基础配置">
-        <el-form label-position="left" size="small">
-          <el-form-item label="中心维度">
-            <el-input></el-input>
-          </el-form-item>
-          <el-form-item label="中心纬度">
-            <el-input></el-input>
-          </el-form-item>
-          <el-form-item label="地图范围(KM)">
-            <el-input></el-input>
-          </el-form-item>
-        </el-form>
-        <el-button size="small"> 预览地图范围</el-button>
-        <el-button size="small"> 渲染地图</el-button>
-      </base-panel>
-      <base-panel title="其他设置">
-        <el-button size="small"> 加入模型</el-button>
-        <el-button size="small"> 开启编辑模式</el-button>
-      </base-panel>
+      <map-config
+        v-model="mapOptions"
+        @on-submit="onMapConfigSubmit"
+        @on-reset="onMapConfigReset"
+      />
+      <tile-config
+        v-model="tileOptions"
+        @on-submit="onTileConfigSubmit"
+        @on-reset="onTileConfigReset"
+      />
     </template>
     <template #main>
       <div class="leaflet" ref="leafletRef"></div>
@@ -29,21 +23,89 @@
 <script setup lang="ts">
 import { useLeaflet } from "@/hooks/useLeaflet";
 import { reactive, ref } from "vue";
+import { tileOptionsType } from "@/hooks/useLeaflet/types";
+import { TILE_FILTER_OPTIONS } from "@/configs/leaflet";
 import BasePageLayout from "@/components/BasePageLayout/index.vue";
-import BasePanel from "@/components/BasePanel/index.vue";
-import BaseGridRow from "@/components/BaseGridRow/index.vue";
-
+import BaseButtonGroup from "@/components/BaseButtonGroup/index.vue";
+import MapConfig from "./components/mapConfig.vue";
+import TileConfig from "./components/tileConfig.vue";
 const leafletRef = ref<HTMLElement | undefined>();
-const { map, tile } = useLeaflet(leafletRef, {
-  tileOptions: {
-    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    tileFilterOptions: {},
-  },
-  mapOptions: {
-    zoom: 10,
-    center: [29, 120],
+const tileOptions: tileOptionsType = reactive({
+  url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  tileFilterOptions: {
+    blur: 0,
+    brightness: 100,
+    contrast: 100,
+    grayscale: 0,
+    "hue-rotate": 0,
+    opacity: 100,
+    invert: 0,
+    saturate: 100,
+    sepia: 0,
   },
 });
+const mapOptions = reactive({
+  zoom: 10,
+  centerLat: 29,
+  centerLng: 120,
+});
+const { map, tile } = useLeaflet(leafletRef, { tileOptions, mapOptions });
+const buttonOptions = [
+  {
+    text: "添加模型",
+    type: "primary",
+    icon: "cogs",
+    handle: () => {
+      console.log(123);
+    },
+  },
+  {
+    text: "导出场景",
+    type: "primary",
+    icon: "cogs",
+    handle: () => {
+      console.log(123);
+    },
+  },
+  
+];
+const onMapConfigSubmit = () => {
+  const { zoom, centerLat, centerLng } = mapOptions;
+  map.value.flyTo([centerLat, centerLng], zoom);
+};
+const onMapConfigReset = () => {
+  mapOptions.zoom = 10;
+  mapOptions.centerLat = 29;
+  mapOptions.centerLng = 120;
+};
+const onTileConfigSubmit = () => {
+  const { url, tileFilterOptions } = tileOptions;
+  //@ts-ignore
+  if (url !== tile.value!._url) {
+    tile.value.setUrl(url);
+  }
+  leafletRef.value.style.filter = Object.keys(tileFilterOptions).reduce(
+    (prev, key) => {
+      const cur = ` ${key}(${tileFilterOptions[key]}${TILE_FILTER_OPTIONS[key]["unit"]})`;
+      return (prev += cur);
+    },
+    ""
+  );
+};
+const onTileConfigReset = () => {
+  tileOptions.url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  tileOptions.tileFilterOptions = {
+    blur: 0,
+    brightness: 100,
+    contrast: 100,
+    grayscale: 0,
+    "hue-rotate": 0,
+    opacity: 100,
+    invert: 0,
+    saturate: 100,
+    sepia: 0,
+  };
+};
 </script>
 <style>
 .leaflet {

@@ -24,7 +24,7 @@
         </el-form-item>
       </base-grid-row>
       <base-grid-row :columns="2" :gap="6">
-        <el-form-item label="缩放倍速:">
+        <el-form-item label="范围(km):">
           <el-input-number
             v-model="modelValue.zoom"
             controls-position="right"
@@ -33,9 +33,20 @@
           />
         </el-form-item>
       </base-grid-row>
-      <base-grid-row :columns="2" :gap="6">
-        <el-button type="danger" @click="emit('onReset')">恢复默认配置</el-button>
-        <el-button type="primary" @click="emit('onSubmit')">应用配置</el-button>
+      <base-grid-row :columns="1">
+        <el-form-item label="Mapbox Token">
+          <el-input v-model="modelValue.zoom" />
+        </el-form-item>
+      </base-grid-row>
+      <base-grid-row :columns="1">
+        <el-button type="primary" @click="emit('onReset')"
+          >预览地图范围</el-button
+        >
+        <!-- <el-button type="primary" @click="emit('onSubmit')">渲染地形</el-button> -->
+      </base-grid-row>
+      <base-grid-row :columns="1">
+        <!-- <el-button type="primary" @click="emit('onReset')">预览地图范围</el-button> -->
+        <el-button type="primary" @click="emit('onSubmit')">渲染地形</el-button>
       </base-grid-row>
     </el-form>
   </base-panel>

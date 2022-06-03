@@ -28,7 +28,6 @@ export function useLeaflet(
   const map = ref<L.Map | undefined>();
   const tile = ref<L.TileLayer | undefined>();
   const refreshTileOptions = (tileOptions: tileOptionsType) => {
-    console.log(tile.value);
     if (tile.value) {
       //@ts-ignore
       if (tile.value?._url !== tileOptions.url) {

@@ -27,6 +27,9 @@ const onHandle = (handle) => isFunction(handle) && handle();
 <style lang="scss" scoped>
 .base-button-group {
   display: flex;
+  &:deep(.el-button){
+    margin-left: 6px!important;
+  }
   .base-button-icon {
     margin-right: 4px;
   }

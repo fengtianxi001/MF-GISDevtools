@@ -40,7 +40,7 @@ if (!gotTheLock) {
 } else {
   app.on("second-instance", () => {
     if (mainWindow) {
-      if (mainWindow.isMinimized()) mainWindow.restore();
+      if (mainWindow.isMinimized && mainWindow.isMinimized()) mainWindow.restore();
       mainWindow.focus();
     }
   });

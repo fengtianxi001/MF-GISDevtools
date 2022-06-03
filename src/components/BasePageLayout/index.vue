@@ -6,7 +6,7 @@
     </div>
 
     <div class="base-page__content">
-      <div class="base-page__sidebar">
+      <div class="base-page__sidebar" v-if="$slots.sider">
         <el-scrollbar class="base-page__sidebar__srollbar">
           <slot name="sider"></slot>
         </el-scrollbar>
@@ -57,16 +57,18 @@ const onTabHandle = (value: any) => {
   .base-page__content {
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 310px 1fr;
+    display: flex;
+    // grid-template-columns: 310px 1fr;
     .base-page__sidebar {
-      width: 100%;
+      width: 310px;
+      flex-shrink: 0;
       height: calc(100vh - 43px - 40px);
       overflow: auto;
       background-color: #fff;
       border-right: 1px solid $my_border_color;
       overflow: hidden;
       .base-page__sidebar__srollbar {
+        flex:1;
         padding: 0 10px;
       }
     }

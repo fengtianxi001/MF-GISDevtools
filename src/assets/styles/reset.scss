@@ -6,5 +6,20 @@
     border-radius: 4px;
     padding: 6px;
     margin-bottom: 0px;
-    // border: 1px solid #f4f4f4;
+    border: 1px solid #f4f4f4;
+}
+.el-button + .el-button{
+    margin-left: 0px!important;
+}
+
+.leaflet-draw-actions a{
+    background-color: #fff!important;
+    // border-radius: 6px ;
+    overflow: hidden;
+}
+
+.leaflet-right .leaflet-draw-actions{
+    margin-right: 6px!important;
+    font-size: 12px;
+    height: 10px;
 }
