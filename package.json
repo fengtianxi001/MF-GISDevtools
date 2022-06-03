@@ -16,6 +16,7 @@
         "core-js": "^3.8.3",
         "element-plus": "^2.2.2",
         "geojson-polygon-center": "^0.0.0",
+        "highlight.js": "^11.4.0",
         "leaflet": "1.6.0",
         "leaflet-draw": "^1.0.4",
         "lodash-es": "^4.17.21",

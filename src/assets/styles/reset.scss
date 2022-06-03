@@ -1,25 +1,26 @@
-.el-form--small.el-form--label-top .el-form-item .el-form-item__label{
-    margin-bottom: 0!important;
+.el-form--small.el-form--label-top .el-form-item .el-form-item__label {
+  margin-bottom: 0 !important;
 }
-.el-form--label-top .el-form-item{
-    background-color: #fafafc;
-    border-radius: 4px;
-    padding: 6px;
-    margin-bottom: 0px;
-    border: 1px solid #f4f4f4;
+.el-form--label-top .el-form-item {
+  background-color: #fafafc;
+  border-radius: 4px;
+  padding: 6px;
+  margin-bottom: 0px;
+  border: 1px solid #f4f4f4;
 }
-.el-button + .el-button{
-    margin-left: 0px!important;
-}
-
-.leaflet-draw-actions a{
-    background-color: #fff!important;
-    // border-radius: 6px ;
-    overflow: hidden;
+.el-button + .el-button {
+  margin-left: 0px !important;
 }
 
-.leaflet-right .leaflet-draw-actions{
-    margin-right: 6px!important;
-    font-size: 12px;
-    height: 10px;
+.leaflet-draw-actions a {
+  background-color: #fff !important;
+  // border-radius: 6px ;
+  overflow: hidden;
 }
+
+.leaflet-right .leaflet-draw-actions {
+  margin-right: 6px !important;
+  font-size: 12px;
+  height: 10px;
+}
+

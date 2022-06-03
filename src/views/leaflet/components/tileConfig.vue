@@ -5,9 +5,9 @@
         <el-form-item label="图源选择:">
           <el-select style="width: 100%" v-model="modelValue.url">
             <el-option
-              v-for="(value, label) in TILE_LAYER_URLS"
-              :label="label"
-              :value="value"
+              v-for="value in TILE_LAYER_URLS"
+              :label="value.label"
+              :value="value.value"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -25,9 +25,11 @@
         </el-form-item>
       </base-grid-row>
 
-      <base-grid-row :columns="2" :gap="6">
-        <el-button type="danger" @click="emit('onReset')">恢复默认配置</el-button>
-        <el-button type="primary" @click="emit('onSubmit')">应用配置</el-button>
+      <base-grid-row :columns="1">
+        <el-button type="danger" @click="emit('onReset')"
+          >恢复默认配置</el-button
+        >
+        <!-- <el-button type="primary" @click="emit('onSubmit')">应用配置</el-button> -->
       </base-grid-row>
       <base-grid-row :columns="1"> </base-grid-row>
     </el-form>
@@ -38,6 +40,7 @@ import BasePanel from "@/components/BasePanel/index.vue";
 import BaseGridRow from "@/components/BaseGridRow/index.vue";
 import { tileOptionsType } from "@/hooks/useLeaflet/types";
 import { TILE_FILTER_OPTIONS, TILE_LAYER_URLS } from "@/configs/leaflet";
+import { watch } from "vue";
 interface PropsType {
   modelValue: tileOptionsType;
 }
@@ -49,4 +52,9 @@ const emit = defineEmits<{
   (e: "onSubmit"): void;
   (e: "onReset"): void;
 }>();
+
+watch(
+  [props.modelValue],
+  () => emit("onSubmit")
+);
 </script>

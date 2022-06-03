@@ -1,4 +1,5 @@
 import L from "leaflet";
+
 export const TILE_LAYER_URLS = {
   STREET: {
     label: "街景图",
@@ -10,6 +11,23 @@ export const TILE_LAYER_URLS = {
       "https://webst01.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
   },
 } as const;
+
+export const DEFAULT_OPTIONS = {
+  CENTER: [26.342523, 119.840262] as L.LatLngExpression,
+  ZOOM: 14,
+  TILE_URL: TILE_LAYER_URLS.STREET.value,
+  TILE_FILTER: {
+    blur: 0,
+    brightness: 100,
+    contrast: 100,
+    grayscale: 0,
+    "hue-rotate": 0,
+    opacity: 100,
+    invert: 0,
+    saturate: 100,
+    sepia: 0,
+  },
+};
 
 export const TILE_FILTER_OPTIONS = {
   blur: {
@@ -48,7 +66,7 @@ export const TILE_FILTER_OPTIONS = {
     unit: "%",
     default: 0,
     props: {
-      max: 500,
+      max: 200,
       min: 0,
     },
   },
@@ -58,7 +76,7 @@ export const TILE_FILTER_OPTIONS = {
     unit: "deg",
     default: 0,
     props: {
-      max: 500,
+      max: 360 * 2,
       min: 0,
     },
   },
@@ -68,7 +86,7 @@ export const TILE_FILTER_OPTIONS = {
     unit: "%",
     default: 100,
     props: {
-      max: 500,
+      max: 100,
       min: 0,
     },
   },
@@ -78,7 +96,7 @@ export const TILE_FILTER_OPTIONS = {
     unit: "%",
     default: 0,
     props: {
-      max: 500,
+      max: 100,
       min: 0,
     },
   },

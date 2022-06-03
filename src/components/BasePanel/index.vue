@@ -18,8 +18,7 @@ const props = defineProps<propsType>();
 .base-panel {
   width: 100%;
   border-radius: 6px;
-  // overflow: hidden;
-  // border: 1px solid #dbdbdd;
+  overflow-x: hidden;  // border: 1px solid #dbdbdd;
   margin-top: 10px;
   .base-panel__title {
     $height: 30px;

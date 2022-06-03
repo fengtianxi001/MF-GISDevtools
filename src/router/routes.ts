@@ -34,13 +34,13 @@ export const routes: routesType[] = [
     },
     component: () => import("@/views/geo/index.vue"),
   },
-  {
-    path: "/gis",
-    name: "gis",
-    meta: {
-      title: "GIS信息",
-      icons: requireIcons("03"),
-    },
-    component: () => import("@/views/gis/index.vue"),
-  },
+  // {
+  //   path: "/gis",
+  //   name: "gis",
+  //   meta: {
+  //     title: "GIS信息",
+  //     icons: requireIcons("03"),
+  //   },
+  //   component: () => import("@/views/gis/index.vue"),
+  // },
 ];

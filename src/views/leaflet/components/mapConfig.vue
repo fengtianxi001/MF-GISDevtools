@@ -4,27 +4,27 @@
       <base-grid-row :columns="2" :gap="6">
         <el-form-item label="中心维度:">
           <el-input-number
-            v-model="modelValue.centerLat"
-            :precision="4"
+            v-model="modelValue.center[0]"
+            :precision="3"
             controls-position="right"
-            :step="0.0001"
+            :step="0.001"
             :min="-90"
             :max="90"
           />
         </el-form-item>
         <el-form-item label="中心经度:">
           <el-input-number
-            v-model="modelValue.centerLng"
-            :precision="4"
+            v-model="modelValue.center[1]"
+            :precision="3"
             controls-position="right"
-            :step="0.0001"
+            :step="0.001"
             :min="-180"
             :max="180"
           />
         </el-form-item>
       </base-grid-row>
       <base-grid-row :columns="2" :gap="6">
-        <el-form-item label="缩放倍速:">
+        <el-form-item label="缩放级别:">
           <el-input-number
             v-model="modelValue.zoom"
             controls-position="right"
@@ -34,7 +34,9 @@
         </el-form-item>
       </base-grid-row>
       <base-grid-row :columns="2" :gap="6">
-        <el-button type="danger" @click="emit('onReset')">恢复默认配置</el-button>
+        <el-button type="danger" @click="emit('onReset')"
+          >恢复默认配置</el-button
+        >
         <el-button type="primary" @click="emit('onSubmit')">应用配置</el-button>
       </base-grid-row>
     </el-form>
@@ -46,8 +48,7 @@ import BasePanel from "@/components/BasePanel/index.vue";
 import BaseGridRow from "@/components/BaseGridRow/index.vue";
 interface PropsType {
   modelValue: {
-    centerLat: number;
-    centerLng: number;
+    center: [number, number];
     zoom: number;
   };
 }

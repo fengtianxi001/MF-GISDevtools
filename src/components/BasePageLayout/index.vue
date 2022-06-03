@@ -70,6 +70,7 @@ const onTabHandle = (value: any) => {
       .base-page__sidebar__srollbar {
         flex:1;
         padding: 0 10px;
+        overflow-x: hidden;
       }
     }
     .base-page__main {

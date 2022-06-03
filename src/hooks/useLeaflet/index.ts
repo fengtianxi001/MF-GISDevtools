@@ -1,82 +1,65 @@
-import { nextTick, onMounted, reactive, ref, Ref } from "vue";
-import {
-  leafletOptionsType,
-  tileFilterUnitType,
-  tileFilterkey,
-  tileOptionsType,
-  mapOptionsType,
-} from "./types";
-import { forEach, reduce } from "lodash-es";
 import L from "leaflet";
+// import geojsonArea from "@mapbox/geojson-area";
+// import polygonCenter from "geojson-polygon-center";
+import "leaflet-draw";
+import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
-const FILTER_UNIT: tileFilterUnitType = {
-  blur: "px",
-  brightness: "%",
-  contrast: "%",
-  grayscale: "%",
-  "hue-rotate": "deg",
-  opacity: "%",
-  invert: "%",
-  saturate: "%",
-  sepia: "%",
-} as const;
-
-export function useLeaflet(
-  container: Ref<HTMLElement | null | undefined>,
-  leafletOptions: leafletOptionsType
-) {
+import {
+  DRAWER_LOCAL,
+  DRAWER_CONFIG,
+  DEFAULT_OPTIONS,
+} from "@/configs/leaflet";
+import { onMounted, ref, Ref } from "vue";
+import { TILE_FILTER_OPTIONS } from "@/configs/leaflet";
+export function useLeaflet(element: Ref<HTMLElement | null | undefined>) {
   const map = ref<L.Map | undefined>();
   const tile = ref<L.TileLayer | undefined>();
-  const refreshTileOptions = (tileOptions: tileOptionsType) => {
-    if (tile.value) {
-      //@ts-ignore
-      if (tile.value?._url !== tileOptions.url) {
-        tile.value.setUrl(tileOptions.url);
-      }
-
-      if (tileOptions.tileFilterOptions) {
-        const element = document.querySelector(".leaflet-layer") as HTMLElement;
-        let filter = "";
-        forEach(tileOptions.tileFilterOptions, (value, key) => {
-          const unit = FILTER_UNIT[key as tileFilterkey];
-          filter += ` ${key}(${value + unit})`;
-        });
-        element.style.filter = filter;
-      }
-    }
-  };
-  const refreshMapOptions = (mapOptions: mapOptionsType) => {
-    if (map.value instanceof L.Map) {
-      map.value.setZoom(mapOptions.zoom);
-      map.value.setView(mapOptions.center);
-    }
-  };
+  const drawerLayer = ref<L.FeatureGroup | undefined>();
   onMounted(() => {
-    if (container.value instanceof HTMLElement) {
-      const { mapOptions, tileOptions } = leafletOptions;
-      const center = [mapOptions.centerLat, mapOptions.centerLng];
-      map.value = L.map(
-        container.value,
-        Object.assign(
-          { attributionControl: false, zoomControl: false },
-          { center },
-          mapOptions
-        )
-      );
-      if (mapOptions.zoomAble !== undefined && !mapOptions.zoomAble) {
-        map.value.scrollWheelZoom.disable();
-      }
-      tile.value = L.tileLayer(tileOptions.url);
-      map.value.addLayer(tile.value);
-      nextTick(() => {
-        refreshTileOptions(tileOptions);
-      });
-    }
+    map.value = L.map(element.value, {
+      center: DEFAULT_OPTIONS.CENTER,
+      zoom: DEFAULT_OPTIONS.ZOOM,
+      zoomControl: false,
+      attributionControl: false,
+      crs: L.CRS.EPSG3857,
+    });
+    tile.value = L.tileLayer(DEFAULT_OPTIONS.TILE_URL).addTo(map.value);
+    // initDrawer()
   });
+  const initDrawer = () => {
+    drawerLayer.value = new L.FeatureGroup();
+    const config = DRAWER_CONFIG(drawerLayer.value);
+    //@ts-ignore
+    const drawer = new L.Control.Draw(config);
+    //@ts-ignore
+    L.drawLocal = DRAWER_LOCAL;
+    map.value.addControl(drawer).addLayer(drawerLayer.value);
+    //@ts-ignore
+    map.value.addEventListener(L.Draw.Event.CREATED, (e: any) => {
+      e.layer.addTo(drawerLayer.value);
+    });
+  };
+  const adjustMap = (center: L.LatLngExpression, zoom) => {
+    map.value.flyTo(center, zoom);
+  };
+  const adjustTileUrl = (tileUrl: string) => {
+    tile.value.setUrl(tileUrl);
+  };
+  const adjustTileFilter = (filters: any) => {
+    if (element.value instanceof HTMLElement) {
+      element.value.style.filter = Object.keys(filters).reduce((prev, key) => {
+        const cur = ` ${key}(${filters[key]}${TILE_FILTER_OPTIONS[key]["unit"]})`;
+        return (prev += cur);
+      }, "");
+    }
+  };
   return {
     map,
     tile,
-    refreshMapOptions,
-    refreshTileOptions,
+    drawerLayer,
+    initDrawer,
+    adjustMap,
+    adjustTileUrl,
+    adjustTileFilter,
   };
 }

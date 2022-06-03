@@ -9,6 +9,16 @@
       <i class="mfl mf-search"></i>
       <span>搜索</span>
     </div>
+    <ul class="layout__header__settings">
+      <li>
+        <el-popover placement="bottom" :width="200" trigger="hover">
+          <template #reference>
+            <i class="mfr mf-cog"></i>
+          </template>
+          <div>1234</div>
+        </el-popover>
+      </li>
+    </ul>
   </div>
 </template>
 <script setup lang="ts"></script>
@@ -65,6 +75,25 @@
     .mfl {
       margin-right: 6px;
       font-size: 14px;
+    }
+  }
+  .layout__header__settings {
+    height: 100%;
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    grid-column-gap: 6px;
+    li {
+      width: 25px;
+      height: 25px;
+      background-color: #596178;
+      border-radius: 6px;
+      box-shadow: 0 0 0 0 #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
     }
   }
 }
