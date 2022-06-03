@@ -3,8 +3,8 @@
     <div class="layout__menu__avatar"></div>
     <ul>
       <layout-menu-item
-        v-for="route in routes"
-        :key="$route.path"
+        v-for="(route,index) in routes"
+        :key="index"
         :data="route"
       />
     </ul>

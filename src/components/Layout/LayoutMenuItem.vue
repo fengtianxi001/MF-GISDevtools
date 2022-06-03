@@ -6,7 +6,7 @@
     @mouseout="temActive = false"
     @mouseover="temActive = true"
   >
-    <!-- <layout-menu-icon :name="data.meta.icon" /> -->
+    <img class="menu-item__icon" :src="iconSrc" />
     <span>{{ data.meta.title }}</span>
   </li>
 </template>
@@ -28,28 +28,16 @@ const className = computed(() =>
     ? "layout__menu__item active"
     : "layout__menu__item"
 );
-const menuItemRef = ref();
-const switchIconStatus = () => {
-  const ele = menuItemRef.value as HTMLElement;
+const iconSrc = computed(() => {
   if (isActive.value || temActive.value) {
-    ele.style.setProperty("--menu-icon-color1", "#4d6fef");
-    ele.style.setProperty("--menu-icon-color2", "#80d0bb");
-    ele.style.setProperty("--menu-icon-color3", "#3a43f5");
+    return props.data.meta.icons.active;
   } else {
-    ele.style.setProperty("--menu-icon-color1", "#c4c8d0");
-    ele.style.setProperty("--menu-icon-color2", "#fff");
-    ele.style.setProperty("--menu-icon-color3", "#c4c8d0");
+    return props.data.meta.icons.default;
   }
-};
-watch([isActive, temActive], switchIconStatus);
-onMounted(switchIconStatus);
+});
 </script>
 <style lang="scss" scoped>
 .layout__menu__item {
-  --menu-icon-color1: #c4c8d0;
-  --menu-icon-color2: #fff;
-  --menu-icon-color3: #c4c8d0;
-
   width: 55px;
   height: 55px;
   border-radius: 8px;
@@ -59,6 +47,11 @@ onMounted(switchIconStatus);
   justify-content: center;
   margin-top: 2px;
   user-select: none;
+  .menu-item__icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+  }
   &:hover {
     background-color: $my_main_color__deep;
   }
