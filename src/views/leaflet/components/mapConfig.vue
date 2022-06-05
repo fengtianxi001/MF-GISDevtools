@@ -33,11 +33,10 @@
           />
         </el-form-item>
       </base-grid-row>
-      <base-grid-row :columns="2" :gap="6">
+      <base-grid-row :columns="1">
         <el-button type="danger" @click="emit('onReset')"
           >恢复默认配置</el-button
         >
-        <el-button type="primary" @click="emit('onSubmit')">应用配置</el-button>
       </base-grid-row>
     </el-form>
   </base-panel>

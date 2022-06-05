@@ -1,19 +1,11 @@
 <template>
   <base-page-layout :tabs="[{ label: '2d地图配置', value: '2dConfig' }]">
     <template #buttons>
-      <base-button-group :options="buttonOptions"></base-button-group>
+      <base-button-group :options="buttonOptions" />
     </template>
     <template #sider>
-      <map-config
-        v-model="mapOptions"
-        @on-submit="onMapConfigSubmit"
-        @on-reset="onMapConfigReset"
-      />
-      <tile-config
-        v-model="tileOptions"
-        @on-submit="onTileConfigSubmit"
-        @on-reset="onTileConfigReset"
-      />
+      <map-config v-model="mapOptions" @on-reset="resetMapOptions" />
+      <tile-config v-model="tileOptions" @on-reset="resetTileOptions" />
     </template>
     <template #main>
       <div class="leaflet" ref="leafletRef"></div>
@@ -25,40 +17,28 @@
     confirmText="复制到粘贴板"
     @on-confirm="onClipboard"
   >
-    <!-- <base-code :code="configText" /> -->
     {{ configText }}
   </base-dialog>
 </template>
 <script setup lang="ts">
 import { useLeaflet } from "@/hooks/useLeaflet";
-import { reactive, ref } from "vue";
-import { tileOptionsType } from "@/hooks/useLeaflet/types";
-import { DEFAULT_OPTIONS } from "@/configs/leaflet";
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
 import BasePageLayout from "@/components/BasePageLayout/index.vue";
 import BaseButtonGroup from "@/components/BaseButtonGroup/index.vue";
 import MapConfig from "./components/mapConfig.vue";
 import TileConfig from "./components/tileConfig.vue";
 import BaseDialog from "@/components/BaseDialog/index.vue";
-import { ElMessage } from "element-plus";
-// import BaseCode from "@/components/BaseCode/index.vue";
 const { clipboard } = require("electron");
 const leafletRef = ref<HTMLElement | undefined>();
 const dialogVisible = ref(false);
 const configText = ref("");
-const tileOptions: tileOptionsType = reactive({
-  url: DEFAULT_OPTIONS.TILE_URL,
-  tileFilterOptions: { ...DEFAULT_OPTIONS.TILE_FILTER },
-});
-const mapOptions = reactive({
-  zoom: DEFAULT_OPTIONS.ZOOM,
-  center: DEFAULT_OPTIONS.CENTER as [number, number],
-});
 const onClipboard = () => {
   clipboard.writeText(configText.value);
   ElMessage.success("复制成功");
 };
 
-const { tile, adjustMap, adjustTileUrl, adjustTileFilter } =
+const { mapOptions, tileOptions, resetMapOptions, resetTileOptions } =
   useLeaflet(leafletRef);
 const buttonOptions = [
   {
@@ -76,23 +56,6 @@ const buttonOptions = [
     },
   },
 ];
-const onMapConfigSubmit = () => adjustMap(mapOptions.center, mapOptions.zoom);
-const onMapConfigReset = () => {
-  mapOptions.zoom = 10;
-  mapOptions.center = DEFAULT_OPTIONS.CENTER as [number, number];
-};
-const onTileConfigSubmit = () => {
-  const { url, tileFilterOptions } = tileOptions;
-  //@ts-ignore
-  if (url !== tile.value._url) {
-    adjustTileUrl(url);
-  }
-  adjustTileFilter(tileFilterOptions);
-};
-const onTileConfigReset = () => {
-  tileOptions.url = DEFAULT_OPTIONS.TILE_URL;
-  tileOptions.tileFilterOptions = { ...DEFAULT_OPTIONS.TILE_FILTER };
-};
 </script>
 <style>
 .leaflet {
