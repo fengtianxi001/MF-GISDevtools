@@ -17,7 +17,7 @@
     confirmText="复制到粘贴板"
     @on-confirm="onClipboard"
   >
-    {{ configText }}
+    {{ generalOptions }}
   </base-dialog>
 </template>
 <script setup lang="ts">
@@ -31,29 +31,24 @@ import TileConfig from "./components/tileConfig.vue";
 import BaseDialog from "@/components/BaseDialog/index.vue";
 const { clipboard } = require("electron");
 const leafletRef = ref<HTMLElement | undefined>();
+const {
+  mapOptions,
+  tileOptions,
+  generalOptions,
+  resetMapOptions,
+  resetTileOptions,
+} = useLeaflet(leafletRef);
 const dialogVisible = ref(false);
-const configText = ref("");
 const onClipboard = () => {
-  clipboard.writeText(configText.value);
+  clipboard.writeText(generalOptions.value);
   ElMessage.success("复制成功");
 };
-
-const { mapOptions, tileOptions, resetMapOptions, resetTileOptions } =
-  useLeaflet(leafletRef);
 const buttonOptions = [
   {
     text: "生成配置文件",
     type: "primary",
     icon: "cogs",
-    handle: () => {
-      const result = {
-        地图配置: mapOptions,
-        地图瓦片: tileOptions.url,
-        地图滤镜: leafletRef.value.style.filter?.split(" "),
-      };
-      dialogVisible.value = true;
-      configText.value = JSON.stringify(result, null, 4);
-    },
+    handle: () => (dialogVisible.value = true),
   },
 ];
 </script>
