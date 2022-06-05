@@ -1,4 +1,5 @@
 import * as THREE from "three";
+THREE.Object3D.DefaultUp = new THREE.Vector3(0, 0, 1)
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { onMounted, shallowRef, Ref } from "vue";
 export function useThree(element: Ref<HTMLElement | undefined>) {
@@ -13,7 +14,6 @@ export function useThree(element: Ref<HTMLElement | undefined>) {
     control.value = initControl();
     const axesHelper = new THREE.AxesHelper(5 * 1000);
     scene.value.add(axesHelper);
-
     animate();
   });
   const initCamera = (element: HTMLElement) => {

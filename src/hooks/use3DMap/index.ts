@@ -1,11 +1,12 @@
-import ThreeGeo from "three-geo/dist/three-geo.esm";
+import ThreeGeo from "@/utils/three-geo.esm.js";
 import { DEFAULT_OPTIONS } from "@/configs/leaflet";
-import { reactive, shallowRef } from "vue";
+import { reactive, shallowRef, ref } from "vue";
 import { ElMessage } from "element-plus";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
 const { remote } = require("electron");
 const fs = require("fs");
 export function use3DMap() {
+  const loading = ref(false);
   const mapOptions = reactive({
     radius: 10,
     center: [...(DEFAULT_OPTIONS.CENTER as [number, number])],
@@ -14,6 +15,7 @@ export function use3DMap() {
   });
   const terrain = shallowRef<any>();
   const init3DMap = async () => {
+    loading.value = true;
     const { radius, center, tokenMapbox, level } = mapOptions;
     if (!tokenMapbox) {
       ElMessage.error("token 不能为空");
@@ -23,6 +25,7 @@ export function use3DMap() {
       });
       const result = await tgeo.getTerrainRgb(center, radius, level);
       terrain.value = result;
+      loading.value = false;
       return result;
     }
   };
@@ -52,8 +55,8 @@ export function use3DMap() {
   return {
     terrain,
     mapOptions,
+    loading,
     init3DMap,
-
     saveTerrain,
   };
 }

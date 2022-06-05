@@ -7,20 +7,19 @@
       <map-config v-model="mapOptions" @on-submit="onMapConfigSubmit" />
     </template>
     <template #main>
-      <div class="three" ref="threeRef"></div>
+      <div v-loading="loading" class="three" ref="threeRef"></div>
     </template>
   </base-page-layout>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
 import BasePageLayout from "@/components/BasePageLayout/index.vue";
 import BaseButtonGroup from "@/components/BaseButtonGroup/index.vue";
 import MapConfig from "./components/mapConfig.vue";
 import { use3DMap } from "@/hooks/use3DMap";
 import { useThree } from "@/hooks/useThree";
 const threeRef = ref();
-const { terrain, mapOptions, init3DMap,saveTerrain } = use3DMap();
+const { terrain, mapOptions, loading, init3DMap, saveTerrain } = use3DMap();
 const { scene } = useThree(threeRef);
 const buttonOptions = [
   {
@@ -28,13 +27,15 @@ const buttonOptions = [
     type: "primary",
     icon: "cogs",
     handle: () => {
-      saveTerrain()
+      saveTerrain();
     },
   },
 ];
 const onMapConfigSubmit = async () => {
+  scene.value.remove(terrain.value);
   const result = await init3DMap();
   if (result) {
+    // console.log(scene.value)
     scene.value.add(terrain.value);
   }
 };
