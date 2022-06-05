@@ -1,15 +1,12 @@
 # 🚀 MF-GISDevtools
 
-<div align="center">
-	<img src="https://raw.githubusercontent.com/fengtianxi001/MF-GISDevtools/main/sreenshot/poster.png">
-  <div>
+<div align="left">
     <img src="https://img.shields.io/github/languages/top/fengtianxi001/MF-GISDevtools">
     <img src="https://travis-ci.org/boennemann/badges.svg?branch=master">
     <img src="https://img.shields.io/github/issues/fengtianxi001/MF-GISDevtools">
     <img src="https://img.shields.io/github/forks/fengtianxi001/MF-GISDevtools">
     <img src="https://img.shields.io/github/stars/fengtianxi001/MF-GISDevtools">
     <img src="https://img.shields.io/github/downloads/fengtianxi001/MF-GISDevtools/total">
-  </div>
 </div>
 
 ## 项目简介 
