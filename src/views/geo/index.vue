@@ -11,22 +11,29 @@
     </template>
   </base-page-layout>
 </template>
-<script setup lang="ts">
+<script setup>
 import { onMounted, reactive, ref } from "vue";
 import { tileOptionsType } from "@/hooks/useLeaflet/types";
 import { TILE_FILTER_OPTIONS } from "@/configs/leaflet";
+import { DEFAULT_OPTIONS } from "@/configs/leaflet";
 import BasePageLayout from "@/components/BasePageLayout/index.vue";
 import BaseButtonGroup from "@/components/BaseButtonGroup/index.vue";
 import MapConfig from "./components/mapConfig.vue";
-import { DEFAULT_OPTIONS } from "@/configs/leaflet";
-import { useThree } from "@/hooks/useThree";
-import THREE from "three";
-import ThreeGeo from "@/utils/Three-geo/ThreeGeo.js";
-// console.log(THREE)
-const leafletRef = ref<HTMLElement | undefined>();
+import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
+
+import Three from "@/utils/three";
+// import ThreeGeo from "@/utils/threeGeo/index.js";
+import { loadTerrain } from "@/utils/threeGeoDemo";
+import { ElMessage } from "element-plus";
+const fs = require("fs");
+const path = require("path");
+// global.require = require;
+const gltfexporter = new GLTFExporter();
+let three;
+const leafletRef = ref();
 const mapOptions = reactive({
   radius: 10,
-  center: DEFAULT_OPTIONS.CENTER as [number, number],
+  center: DEFAULT_OPTIONS.CENTER,
   tokenMapbox: "",
 });
 const buttonOptions = [
@@ -43,26 +50,54 @@ const buttonOptions = [
     type: "primary",
     icon: "cogs",
     handle: () => {
-      console.log(123);
+      const options = {
+  //true导出位置、缩放、旋转变换，false导出节点的矩阵变换
+  trs: false,
+  //是否只导出可见的
+  onlyVisible: true,
+  truncateDrawRange: true,
+  //是否二进制，true导出glb模型，false导出gltf模型
+  binary: false,
+  //最大贴图尺寸
+  maxTextureSize: Infinity,
+};
+      gltfexporter.parse(
+        terrain,
+        function (result) {
+          const target = path.resolve("/Users/fengtianxi001/Desktop/");
+          const output = JSON.stringify(result, null, 2);
+          fs.writeFileSync(target + `/1-2.gltf`, output);
+          // console.log("inter1");
+          //result即是gltf文件，写入到本地
+        },
+        options
+      );
     },
   },
 ];
+let terrain
 const onMapConfigSubmit = async () => {
   const { radius, center, tokenMapbox } = mapOptions;
-  const tgeo = new ThreeGeo({
-    tokenMapbox: tokenMapbox,
-  });
-  const terrain = await tgeo.getTerrainRgb(center, radius, 12);
-  console.log(terrain);
+  // console.log(center);
+  if (!tokenMapbox) {
+    return ElMessage.error("请填写token");
+  }
+  if (three) {
+    loadTerrain().then((res) => {
+      terrain = res;
+      three.scene.add(res);
+    });
+  }
 };
+
 const threeRef = ref();
 
-const { scene, axesHelper } = useThree(threeRef);
 onMounted(() => {
-  console.log(scene.value, axesHelper.value)
-  scene.value.add(axesHelper.value);
-})
+  three = new Three(threeRef.value);
+  three.initAxesHelper();
+});
 </script>
+
 <style>
 .three {
   width: 100%;
