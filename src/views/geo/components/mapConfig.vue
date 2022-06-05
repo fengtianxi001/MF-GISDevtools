@@ -24,6 +24,14 @@
         </el-form-item>
       </base-grid-row>
       <base-grid-row :columns="2" :gap="6">
+        <el-form-item label="地图级别:">
+          <el-input-number
+            v-model="modelValue.level"
+            controls-position="right"
+            :min="1"
+            :max="20"
+          />
+        </el-form-item>
         <el-form-item label="范围(km):">
           <el-input-number
             v-model="modelValue.radius"
@@ -38,9 +46,6 @@
           <el-input v-model="modelValue.tokenMapbox" />
         </el-form-item>
       </base-grid-row>
-      <!-- <base-grid-row :columns="1">
-        <el-button type="primary" @click="onPreview">预览地图范围</el-button>
-      </base-grid-row> -->
       <base-grid-row :columns="1">
         <el-button type="primary" @click="emit('onSubmit')">渲染地形</el-button>
       </base-grid-row>
@@ -61,6 +66,7 @@ interface PropsType {
     center: [number, number];
     radius: number;
     tokenMapbox?: string;
+    level: number;
   };
 }
 const props = defineProps<PropsType>();

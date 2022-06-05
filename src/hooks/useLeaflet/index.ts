@@ -1,10 +1,10 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { DEFAULT_OPTIONS, TILE_FILTER_OPTIONS } from "@/configs/leaflet";
-import { onMounted, ref, Ref, reactive, watch, computed } from "vue";
+import { onMounted, shallowRef, Ref, reactive, watch, computed } from "vue";
 export function useLeaflet(element: Ref<HTMLElement | null | undefined>) {
-  const map = ref<L.Map | undefined>();
-  const tile = ref<L.TileLayer | undefined>();
+  const map = shallowRef<L.Map | undefined>();
+  const tile = shallowRef<L.TileLayer | undefined>();
   const mapOptions = reactive({
     zoom: DEFAULT_OPTIONS.ZOOM,
     center: [...(DEFAULT_OPTIONS.CENTER as [number, number])] as [
