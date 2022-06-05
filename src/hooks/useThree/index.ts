@@ -1,23 +1,31 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-// import { ref } from "vue";
-export function useThree(element: HTMLElement) {
-  const scene = new THREE.Scene();
-  const camera = initCamera(element);
-  const renderer = initRenderer(element);
-  const control = initControl(camera, renderer);
-  const axesHelper = new THREE.AxesHelper(5 * 1000);
-  const render = () => {
-    renderer.render(scene, camera);
-    requestAnimationFrame(() => render());
-  };
+import { ref, onMounted, Ref } from "vue";
+export function useThree(element: Ref<HTMLElement>) {
+  const scene = ref<THREE.Scene | undefined>();
+  const camera = ref<THREE.PerspectiveCamera | undefined>();
+  const renderer = ref<THREE.WebGLRenderer | undefined>();
+  const control = ref<OrbitControls | undefined>();
+  const axesHelper = ref<THREE.AxesHelper | undefined>();
+  onMounted(() => {
+    scene.value = new THREE.Scene();
+    camera.value = initCamera(element.value);
+    renderer.value = initRenderer(element.value);
+    control.value = initControl(camera.value, renderer.value);
+    axesHelper.value = new THREE.AxesHelper(5 * 1000);
+    const render = () => {
+      renderer.value.render(scene.value, camera.value);
+      requestAnimationFrame(() => render());
+    };
+    render();
+  });
   return {
     scene,
     camera,
     renderer,
     control,
     axesHelper,
-  }
+  };
 }
 
 function initCamera(element: HTMLElement): THREE.PerspectiveCamera {
