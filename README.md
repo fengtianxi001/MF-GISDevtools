@@ -1,23 +1,38 @@
-# 🚀 MF-GISDevtools
+# 🐶 MF-GISDevtools
 
-<div align="left">
-    <img src="https://img.shields.io/github/languages/top/fengtianxi001/MF-GISDevtools">
-    <img src="https://travis-ci.org/boennemann/badges.svg?branch=master">
-    <img src="https://img.shields.io/github/issues/fengtianxi001/MF-GISDevtools">
-    <img src="https://img.shields.io/github/forks/fengtianxi001/MF-GISDevtools">
-    <img src="https://img.shields.io/github/stars/fengtianxi001/MF-GISDevtools">
-    <img src="https://img.shields.io/github/downloads/fengtianxi001/MF-GISDevtools/total">
-</div>
+> 一个狗都不用的GIS开发小工具
 
-## 项目简介 
+## 项目简介
 
-一个狗的不用的GIS开发小工具
+> 作者目前任职水利行业web前端岗位，在项目期间为了减轻心智，为部门UI和产品经理设计了此程序，在程序内UI可以自行调整地图瓦片风格，最后将地图瓦片的配置文件导出。 产品可以根据经纬度生成3d地形模型，导入水利建筑模型，自行调整模型比例，灯光等参数，最终导出glb文件模型。
 
-## 平台
-> 目前支持macOs 和 windows平台
+## 项目说明
 
-## 页面展示
-![show](https://raw.githubusercontent.com/fengtianxi001/MF-GISDevtools/main/screenshot/01.png)
-![show](https://raw.githubusercontent.com/fengtianxi001/MF-GISDevtools/main/screenshot/02.png)
+- 安装包可能会落后于代码版本,所以最好是克隆代码,自行打包
+  
+- 3d地图模块依赖mapbox api, 需要自行申请。
+  
+- 项目会根据实际开发体验和需求持续更新
+  
 
+## 项目功能
 
+已完成的功能内容如下:
+
+- [x] 地图瓦片风格调整，配置文件导出
+  
+- [x] 3D地形模型编辑，模型导出
+  
+
+待更新的功能内容如下
+
+- [ ] 经纬度拾取
+  
+- [ ] 行政区`geoJson`下载
+  
+- [ ] `geoJson`数据展示
+  
+
+## 项目截图
+
+![](https://raw.githubusercontent.com/fengtianxi001/MF-GISDevtools/main/screenshot/01.png)
